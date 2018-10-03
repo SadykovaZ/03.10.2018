@@ -35,34 +35,59 @@ double sum3(double a, ...) //функции с переменным числом
 	}
 	return sum;
 }
-template <typename T>
-T oper(char o, T arg, ...)
+//template <typename T>
+//T oper(char o, T arg, ...)
+//{
+//	va_list p; //специальный указатель автоматически опрделеяет тип указателя
+//	T sum = 0;
+//	T prod = 1;
+//	int count = 0;
+//	T k = arg;
+//	__crt_va_start(p, arg); //T* p = &a;
+//	do
+//	{
+//		if (o == 's' || o == '+')
+//		{
+//			sum += k; count++;
+//		}
+//		else if (o == '*')
+//		{
+//			prod *= k;
+//		}
+//	} while (k = __crt_va_arg(p, T)); // --пока не ноль передвигаемся
+//	__crt_va_end(p);//--закрыли указатель
+//	if (o == 's')
+//		return ((sum) / count);
+//	else if (o == '+')
+//		return sum;
+//	else if (o == '*')
+//		return prod;
+//}
+
+//HT
+int oper(char o, int n, ...)
 {
-	va_list p; //специальный указатель автоматически опрделеяет тип указателя
-	T sum = 0;
-	T prod = 1;
+	int *p = &n;
+	int sum = 0;
+	int prod = 1;
 	int count = 0;
-	T k = arg;
-	__crt_va_start(p, arg); //T* p = &a;
-	do
+
+	for (int i = 1; i <= n; i++)
 	{
 		if (o == 's' || o == '+')
-		{
-			sum += k; count++;
-		}
+			sum += p[i];
 		else if (o == '*')
-		{
-			prod *= k;
-		}
-	} while (k = __crt_va_arg(p, T)); // --пока не ноль передвигаемся
-	__crt_va_end(p);//--закрыли указатель
-	if (o == 's')
-		return ((sum) / count);
-	else if (o == '+')
+			prod *= p[i];
+	}
+
+
+	if (o == '+')
 		return sum;
 	else if (o == '*')
 		return prod;
 }
+
+
 int summa(char* str)
 {
 	int sum = 0;
@@ -128,7 +153,7 @@ void main()
 	}
 	else if (n == 5)
 	{
-		cout << oper('*', 1, 1, 4, 5, 5, 0) << endl;
+		cout << oper('+', 5, 1, 4, 5, 1, 20) << endl;
 	}
 	else if (n == 6)
 	{
